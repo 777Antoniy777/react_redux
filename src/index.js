@@ -39,3 +39,8 @@ store.dispatch({
     type: 'ADD_POST',
     body: 'Я поел',
 });
+
+store.dispatch({
+    type: 'ADD_POST',
+    body: 'Я покекал',
+});
