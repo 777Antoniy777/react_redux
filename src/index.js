@@ -4,13 +4,14 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import reducer from './reducers/index';
+import { BrowserRouter, Route } from 'react-router-dom';
+import rootReducer from './reducers/index';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(applyMiddleware(thunk)),
 );
 
@@ -20,7 +21,14 @@ store.subscribe(() => {
 
 ReactDOM.render(
     <Provider store={ store } >
-        <App />
+        <BrowserRouter>
+            <Route
+                path="/"
+                render={() =>
+                    <App />
+                }
+            />
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );

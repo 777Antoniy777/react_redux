@@ -2,8 +2,8 @@ const initialState = '';
 
 export default function createState(state = initialState, action) {
     switch (action.type) {
-        case 'SEARCH_POST':
-            return action.searchMes
+        case 'FILTER_POST':
+            return action.filteredMes
         default:
             return state;
     }

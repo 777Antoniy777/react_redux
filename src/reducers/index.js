@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import addPost from './addPost/addPost';
-import addMessage from './addMessage/addMessage';
-import searchPost from './searchPost/searchPost';
+import { routerReducer } from 'react-router-redux';
+import posts from './posts';
+import messages from './messages';
+import filteredMes from './filteredPosts';
 
 export default combineReducers({
-    addPost,
-    addMessage,
-    searchPost,
+    routing: routerReducer,
+    posts,
+    messages,
+    filteredMes,
 });

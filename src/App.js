@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getPosts } from './actions/getPosts';
 
 class App extends React.Component {
   state = {
@@ -44,7 +45,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { postsState } = this.props;
+    const { postsState, onGetPosts } = this.props;
 
     return (
       <div>
@@ -58,10 +59,14 @@ class App extends React.Component {
           <button onClick={ this.searchPost } type="button">Find post</button>
         </div>
 
+        <div>
+          <button onClick={ onGetPosts } >Get posts</button>
+        </div>
+
         <ul>
           { postsState.map((elem) => 
 
-            <li key={ elem.id } >{ elem.mes }</li>
+            <li key={ elem.id } >{ elem.body }</li>
             
           )}
         </ul>
@@ -72,13 +77,13 @@ class App extends React.Component {
 
 export default connect(
   state => ({
-    postsState: state.addPost.filter(elem => elem.mes.includes(state.searchPost)),
+    postsState: state.posts.filter(elem => elem.body.includes(state.filteredMes)),
   }),
   dispatch => ({
     onAddPost: (postMes) => {
       const newPost = {
         id: Date.now().toString(),
-        mes: postMes,
+        body: postMes,
       };
       
       dispatch({
@@ -86,11 +91,14 @@ export default connect(
         newPost,
       });
     },
-    onSearchPost: (searchMes) => {
+    onSearchPost: (filteredMes) => {
       dispatch({
-        type: 'SEARCH_POST',
-        searchMes,
+        type: 'FILTER_POST',
+        filteredMes,
       })
+    },
+    onGetPosts: () => {
+      dispatch(getPosts())
     },
   })
 )(App);

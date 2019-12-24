@@ -7,6 +7,11 @@ export default function createState(state = initialState, action) {
                 ...state,
                 action.newPost,
             ];
+        case 'GET_POSTS':
+            return [
+                ...state,
+                ...action.posts,
+            ]
         default:
             return state;
     }
